@@ -22,10 +22,21 @@ function App() {
     setQuestions(filteredQuestions)
   }
 
+  function handleChangedAnswer(id, updatedQuestion) {
+    const updatedQuestionArray = questions.map(question => {
+      if (id === question.id) {
+        return updatedQuestion
+      } else {
+        return question
+      }
+    })
+    setQuestions(updatedQuestionArray)
+  }
+
   return (
     <main>
       <AdminNavBar onChangePage={setPage} />
-      {page === "Form" ? <QuestionForm onFormSubmit={handleNewQuestion} /> : <QuestionList questions={questions} onQuestionDelete={handleDeletedQuestion} />}
+      {page === "Form" ? <QuestionForm onFormSubmit={handleNewQuestion} /> : <QuestionList questions={questions} onQuestionDelete={handleDeletedQuestion} handleChangedAnswer={handleChangedAnswer} />}
     </main>
   );
 }
